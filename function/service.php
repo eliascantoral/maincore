@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    //print_r($_POST);
+    print_r($_POST);
     if(isset($_POST["action"])){
         switch ($_POST["action"]){
             case "0":{//Login

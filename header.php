@@ -20,7 +20,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/ihover.css">
         <link rel="stylesheet" href="style/bootstrap/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style/style.css">
 
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-ui/jquery-ui.js"></script>
@@ -59,4 +59,3 @@ and open the template in the editor.
                 </nav>                  
             <?php }?>
          
-    

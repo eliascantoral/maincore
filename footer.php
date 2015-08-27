@@ -51,15 +51,15 @@
 					 window.location.assign(dest);
 				}
 				
-			}else if(dest!=""){						
-				document.getElementById(dest).value=respuesta;
+			}else if(dest!=""){
+                $("#"+dest).val(respuesta);
 			}
 			ajax_end();
 		  },
 		  beforeSend:function(){                      
 			
 		  },
-		  error:function(objXMLHttpRequest){ajax_end();console.log(objXMLHttpRequest);}
+		  error:function(objXMLHttpRequest){$("#"+dest).val("Error...");ajax_end();console.log(objXMLHttpRequest);}
 		});
 		
 	}

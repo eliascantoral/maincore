@@ -1,0 +1,63 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 25/06/2015, 10:12:27 AM
+    Author     : Augusto
+*/
+
+/**********Login**************/
+
+#login_block{
+    background-color: #C2C2C2;
+}
+.login_part{
+    padding: 20px;
+}
+.login-social{
+    border-left: solid thin #C2C2C2;
+    text-align: center;
+}
+#login_block .btn{
+    min-width: 250px;
+}
+#login_canvas{
+    border: solid thin;
+    min-width: 100px;
+    width: auto;
+    margin: 50px;
+}
+.centerd{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#login_background{
+    min-height: 200px;
+    height: auto;
+    width: 300px;
+    padding: 20px;
+    color: #FFF !important;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px solid #000000;
+    background: rgba(0,0,0,0.7);
+}
+
+
+.message{
+    display: none;
+}
+
+.ajax_loader{
+    background-image: url('image/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 100%;
+    min-height: 200px;
+    height: auto;
+}

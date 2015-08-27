@@ -45,5 +45,26 @@
                         }*/
                         
  /********************************************************************************************************/
+ /*********************************************************************************************************/
+                        function trylogin($user, $pass){
+                            $return = array(false, "Error 101");
+                            $query = "SELECT `id`,`fname` FROM `user` WHERE `user`='".$user."' AND `password` = '".$this->encripter($pass)."';";
+                            //echo $query;
+                            $this->makelog($user, "try login", "Usuario '".$user."' intenta ingresar al sistema");
+                            $result = $this->makequery($query);
+                            if($result[0]){
+                                while($row = mysqli_fetch_array($result[1])){
+                                    $return = array(true, array($row['id'],$row['fname']));
+                                    $this->makelog($user, "login", "Usuario '".$user."' ingreso al sistema");
+                                }
+                            }else{
+                                $return = $result;
+                            }
+                            return $return;
+                        }
+                        function tryloginfb($userid){
+
+                        }
+/*********************************************************************************************************/
 	}
 ?>
