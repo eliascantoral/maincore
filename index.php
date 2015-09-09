@@ -7,15 +7,10 @@
  */
 
 include 'header.php';
-
 if(is_login()){
     include 'home.php';
 }else{
     include 'login.php';
 }
-
-?>
-
-<?php
 
 include 'footer.php';

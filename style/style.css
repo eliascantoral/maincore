@@ -61,3 +61,6 @@ and open the template in the editor.
     min-height: 200px;
     height: auto;
 }
+#main-wrapper{
+    margin-top: 60px;
+}

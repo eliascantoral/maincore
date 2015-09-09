@@ -12,7 +12,7 @@
                         <h3>Bienvenido</h3>
                         <p>Por favor, ingrese su usuario y contraseña.</p>
                         <form class="form-horizontal" id="loginform" method="POST">
-                            <input type="text" id="login_answer" value="">
+                            <input type="hidden" class="form-control" id="login_answer" value="">
                           <div class="form-group">
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="username" name="username" placeholder="Usuario" autofocus required="" value="admin">

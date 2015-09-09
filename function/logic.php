@@ -6,9 +6,9 @@
 	}
 	function get_variable($var){
 		switch($var){
-                        case "sitename": return "@emcode";
-                        case "prfx": return "simdosis";
-			case "home": return "http://localhost/medicina/simdosis";
+                        case "sitename": return "MyActivity";
+                        case "prfx": return "myactivity";
+			case "home": return "http://localhost/myactivity/";
 			case "ajax": return "function/service.php";
 			default:{return "";}
 		}
@@ -96,4 +96,7 @@
                 return $return;
         }        
 /********************************************************************************************************************/	
+        include_once 'login_logic.php';
+        include_once 'user_logic.php';
+        include_once 'activity_logic.php';
 ?>

@@ -25,7 +25,7 @@ and open the template in the editor.
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-ui/jquery-ui.js"></script>
         <script src="style/bootstrap/js/bootstrap.min.js"></script>
-		<script>
+		<!--<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -34,7 +34,7 @@ and open the template in the editor.
 		  ga('create', 'UA-21400652-24', 'auto');
 		  ga('send', 'pageview');
 
-		</script>
+		</script>-->
     </head>
     <body>
         <div class="container-fluid">
@@ -53,7 +53,7 @@ and open the template in the editor.
                       </a>
                     </div>                     
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">            
-                        <p class="navbar-text navbar-right">Bienvenido <a href="#" class="navbar-link"><?php echo get_userdata("name");?></a>&nbsp;&nbsp;<a href="?logout=ok" class="navbar-link">Salir</a></p>
+                        <p class="navbar-text navbar-right">Bienvenido <a href="?opt=3" class="navbar-link"><?php echo get_userdata("fname");?></a>&nbsp;&nbsp;<a href="?logout=ok" class="navbar-link">Salir</a></p>
                     </div>
                 </div>
                 </nav>                  
