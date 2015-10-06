@@ -42,6 +42,16 @@
                                 return true;
                             return false;
                         }
+                        private function existdata($data, $field){
+                            $query = "SELECT `id` FROM `user` WHERE `".$field."`='".$data."'";
+                            $result = $this->makequery($query);
+                            if($result[0]){
+                                while($row = mysqli_fetch_array($result[1])){
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }                        
                         
  /********************************************************************************************************/
  /*********************************************************************************************************/
@@ -83,148 +93,7 @@
                                 }
                             }
                             return $return;
-                        }
-                        
-                        
-                        
-                        function get_clientlist($userid){
-                            $return = array(false, "Error 101");
-                            $query = "SELECT `user`.`id` AS userid, `user`.`fname` as fname, `user`.`lname` as lname, `user`.`mail` as mail, `company`.`name` as company FROM `user` INNER JOIN `company` ON `user`.`company`=`company`.`id` WHERE `user`.`status`='1' AND `rol`!='0';";                            
-                            $result = $this->makequery($query);
-                            if($result[0]){
-                                $return = array(true, array());
-                                while($row = mysqli_fetch_array($result[1])){
-                                    array_push($return[1], array($row['userid'],$row['fname']." ".$row['lname'],$row['mail'],$row['company']));
-                                }
-                            }
-                            return $return;
-                        }
-                        function get_companylist($userid){
-                            $return = array(false, "Error 101");
-                            $query = "SELECT * FROM `company` WHERE `status`='1'";
-                            $result = $this->makequery($query);
-                            if($result[0]){
-                                $return = array(true, array());
-                                while($row = mysqli_fetch_array($result[1])){
-                                    array_push($return[1], array($row['id'],$row['name'],$row['address']));
-                                }
-                            }
-                            return $return;
-                        }
-                        function create_tempcliente($newname, $newemail,$newtel, $newcompany, $userid){
-                            $return = array(false, "Eror 101");
-                            $time = time();
-                            $name = explode(" ", $newname);
-                            $fname = "";
-                            $lname = "";                            
-                            if(sizeof($name)>2){
-                                for($i=0;$i<sizeof($name);$i++){        
-                                    if($i<(sizeof($name)/2)-1){
-                                        $fname.= $name[$i] . " ";
-                                    }else{
-                                        $lname.= $name[$i] . " ";
-                                    }
-                                }
-                            }else{
-                                $fname = $name[0];
-                                if(sizeof($name)>1){
-                                    $lname = $name[1];
-                                }else{
-                                    $lname = "---";
-                                }
-                            }
-                            
-                            $mail = $newemail!=""?$newemail:"user".$time."@temporal.com";
-                            
-                            if(!$this->existdata($mail, 'mail')){
-                                $query = "INSERT INTO `user` (`id`, `user`, `password`, `fname`, `lname`, `createtime`, `mail`, `tel` ,`lasttime`, `gmid`, `rol`, `status`, `creater`, `company`) "
-                                            . "VALUES "
-                                        . "(NULL, 'user".$time."', '123456', '".$fname."', '".$lname."', '".$time."', '".$mail."', '".$newtel."', '0', '', '3', '1', '".$userid."', '".$newcompany."');";
-
-                                $result = $this->makequery($query);
-                                if($result[0]){
-                                    
-                                    $query = "SELECT `user`.`id`,`user`.`fname`,`user`.`lname`,`company`.`name` FROM `user` INNER JOIN `company` ON `user`.`company`=`company`.`id` WHERE `user`='user".$time."'";
-                                    $result = $this->makequery($query);
-                                    if($result[0]){
-                                        while($row = mysqli_fetch_array($result[1])){
-                                            $return = array(true, "(".$row[0].")".$row[1]." ".$row[2]." - ".$row[3]);
-                                        }
-                                    }                                    
-                                }                                
-                            }else{
-                                $return = array(false,"Correo ya existe.");
-                            }
-                            return $return;
-                        }
-                        
+                        }            
 /*********************************************************************************************************/
-                        private function existdata($data, $field){
-                            $query = "SELECT `id` FROM `".$field."` WHERE `mail`='".$data."'";
-                            $result = $this->makequery($query);
-                            if($result[0]){
-                                while($row = mysqli_fetch_array($result[1])){
-                                    return true;
-                                }
-                            }
-                            return false;
-                        }
-                        
-                        
-/*********************************************************************************************************/
-                        function get_activitytype($userid){
-                            $return = array(false, "Error 101");
-                            $query ="SELECT * FROM `activity_type` WHERE `status`='1';";
-                            $result = $this->makequery($query);
-                            if($result[0]){
-                                $return = array(true, array());
-                                while($row = mysqli_fetch_array($result[1])){
-                                    array_push($return[1], array($row['id'],$row['name'],$row['description']));
-                                }
-                            }
-                            return $return;
-                        }
-                        function create_activity($stime, $etime, $type, $desc, $client, $user){
-                            $return = array(false, "Error 101");
-                            $time = time();
-                            $query ="INSERT INTO `activity` (`id`, `starttime`, `endtime`, `createtime`, `activitytype`, `description`, `client`, `user`, `status`)
-                                    VALUES (NULL, '".$stime."', '".$etime."', '".$time."', '".$type."', '".$desc."', '".$client."', '".$user."', '1');";
-                            $result = $this->makequery($query);
-                            if($result[0]){
-                                $return = array(true, "Actividad creada correctamente");                                
-                            }
-                            return $return;                            
-                        }
-                        function seek_activity($stime, $etime, $type, $client, $user){
-                                $return = array(false, "Error 101");
-                                $time = time();
-                                
-                                
-                                $query ="SELECT user.id as userid, user.fname as fname, user.lname as lname, activity.starttime as start, activity.endtime as end, type.name as type, activity.description as descr, company.name as company, cliente.fname as clientefname, cliente.lname as clientelname
-                                            FROM `user` as user INNER JOIN `activity` activity ON user.`id`=`activity`.`user`
-                                                               INNER JOIN `activity_type` type ON activity.`activitytype` = type.`id`
-                                                       INNER JOIN `user` as cliente ON cliente.`id`=activity.`client`
-                                                       INNER JOIN `company` as company ON user.`company` = company.`id`
-                                            WHERE";
-                                
-                                if($stime<$etime)
-                                    $query.= " activity.starttime>=".$stime." AND activity.endtime<=".$etime;
-                                
-                                if($type!="all")
-                                    $query.=" activity.type='".$type."'";
-                                
-                                if($client!="0")
-                                    $query.=" activity.client = '".$client."'";
-                                
-                                $query.=" activity.user='".$user."'";
-                                
-                                echo $query;
-                                
-                                /*$result = $this->makequery($query);
-                                if($result[0]){
-                                    $return = array(true, "Actividad creada correctamente");                                
-                                }*/
-                                return $return;                            
-                        }
 	}
 ?>

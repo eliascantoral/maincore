@@ -20,7 +20,7 @@
                           </div>
                           <div class="form-group">
                                 <div class="col-sm-12">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required="" value="admin123456">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required="" value="admin">
                                 </div>
                           </div>
                           <div class="form-group">

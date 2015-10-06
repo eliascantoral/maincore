@@ -6,9 +6,9 @@
 	}
 	function get_variable($var){
 		switch($var){
-                        case "sitename": return "MyActivity";
-                        case "prfx": return "myactivity";
-			case "home": return "http://localhost/myactivity/";
+                        case "sitename": return "MainCore";
+                        case "prfx": return "maincore";
+			case "home": return "http://localhost/maincore/";
 			case "ajax": return "function/service.php";
 			default:{return "";}
 		}
@@ -98,5 +98,4 @@
 /********************************************************************************************************************/	
         include_once 'login_logic.php';
         include_once 'user_logic.php';
-        include_once 'activity_logic.php';
 ?>
