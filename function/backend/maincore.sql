@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2015 at 05:27 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Generation Time: Jul 15, 2016 at 01:00 AM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mydesign`
+-- Database: `merp`
 --
 
 -- --------------------------------------------------------
@@ -26,15 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `log`
 --
 
-CREATE TABLE IF NOT EXISTS `log` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `log` (
+  `id` bigint(20) NOT NULL,
   `user` bigint(20) NOT NULL,
   `time` bigint(20) NOT NULL,
   `action` int(15) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+  `description` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `log`
@@ -74,8 +72,8 @@ INSERT INTO `log` (`id`, `user`, `time`, `action`, `description`) VALUES
 -- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL,
   `user` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `fname` varchar(200) NOT NULL,
@@ -88,13 +86,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `rol` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `creater` bigint(11) NOT NULL,
-  `company` bigint(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user` (`user`),
-  UNIQUE KEY `mail` (`mail`),
-  KEY `creater` (`creater`),
-  KEY `company` (`company`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+  `company` bigint(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -103,6 +96,76 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `user`, `password`, `fname`, `lname`, `createtime`, `mail`, `tel`, `lasttime`, `gmid`, `rol`, `status`, `creater`, `company`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrador', 'Web', 0, '', '', 0, '', 0, 1, 1, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_otheroptions`
+--
+
+CREATE TABLE `user_otheroptions` (
+  `id` bigint(20) NOT NULL,
+  `catalogo` varchar(128) NOT NULL,
+  `value` varchar(512) NOT NULL,
+  `count` int(11) NOT NULL,
+  `createtime` bigint(20) NOT NULL,
+  `lastupdate` bigint(20) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_otheroptions`
+--
+
+INSERT INTO `user_otheroptions` (`id`, `catalogo`, `value`, `count`, `createtime`, `lastupdate`, `status`) VALUES
+(1, 'fractura', 'Celular', 4, 1468312521, 1468312521, 1),
+(2, 'alergia', 'CarbÃ³n', 1, 1468313365, 1468313365, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user` (`user`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user` (`user`),
+  ADD UNIQUE KEY `mail` (`mail`),
+  ADD KEY `creater` (`creater`),
+  ADD KEY `company` (`company`);
+
+--
+-- Indexes for table `user_otheroptions`
+--
+ALTER TABLE `user_otheroptions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `log`
+--
+ALTER TABLE `log`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `user_otheroptions`
+--
+ALTER TABLE `user_otheroptions`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

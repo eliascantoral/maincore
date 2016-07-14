@@ -10,9 +10,15 @@
                         case "prfx": return "maincore";
 			case "home": return "http://localhost/maincore/";
 			case "ajax": return "function/service.php";
+                        case "content": return "http://localhost/maincore/";
 			default:{return "";}
 		}
 	}
+        function startsession(){
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+        }
 	function is_login(){
 		$user = false;
 		if(isset($_SESSION[get_variable("prfx")."_userid"])){$user = $_SESSION[get_variable("prfx")."_userid"];}
@@ -96,6 +102,8 @@
                 return $return;
         }        
 /********************************************************************************************************************/	
-        include_once 'login_logic.php';
-        include_once 'user_logic.php';
+        require_once 'login_logic.php';
+        require_once 'user_logic.php';
+        require_once 'catalogo_logic.php';
+        require_once 'mail_logic.php';
 ?>

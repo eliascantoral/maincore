@@ -95,5 +95,87 @@
                             return $return;
                         }            
 /*********************************************************************************************************/
+                        function get_catalogolist($catalogo){
+                            $query = "SELECT * FROM `catalogo_".$catalogo."` WHERE `status` = 1";
+                            
+                            $result = $this->makequery($query);
+                            $list = array();
+                            if($result[0]){
+                                while($row = mysqli_fetch_array($result[1])){
+                                    array_push($list, $row);
+                                }
+                                return array(true, $list);
+                            }
+                            return array(false, $list);
+                        }
+			function get_catalogooption($catalogo, $id){
+                            $query = "SELECT * FROM `catalogo_".$catalogo."` WHERE `status` = 1 AND `id`='".$id."'";
+                            $result = $this->makequery($query);
+                            $list = array();
+                            if($result[0]){
+                                while($row = mysqli_fetch_array($result[1])){
+                                    array_push($list, $row);
+                                }
+                                return array(true, $list);
+                            }
+                            return array(false, $list);
+						}
+                        function get_catalogovalue($catalogo, $id){
+                            $query = "SELECT `name` FROM `catalogo_".$catalogo."` WHERE `id`='".$id."'";
+                            $result = $this->makequery($query);
+                            $name = "";
+                            if($result[0]){
+                                while($row = mysqli_fetch_array($result[1])){
+                                    $name = $row["name"];
+                                }
+                                return $name;
+                            }
+                            return false;
+                        }
+                        private function catalogo_newother($catalogo, $value){
+                            $query = "SELECT `id` FROM `catalogo_$catalogo` WHERE `value` like '%$value%' LIMIT 1";
+                            $position = false;
+                            $result = $this->makequery($query);
+                            if($result[0]){
+                                while($row = mysqli_fetch_array($result[1])){
+                                    $position = $row['id'];
+                                }
+                            }
+                            if($position===false){
+                                $time = time();
+                                $query = "SELECT `id` FROM `user_otheroptions` WHERE `catalogo`='$catalogo' AND `value` like '%$value%' LIMIT 1";
+                                $result = $this->makequery($query);
+                                if($result[0]){
+                                    while($row = mysqli_fetch_array($result[1])){
+                                        $position = $row['id'];       
+                                    }
+                                }
+                                if($position===false){///Nuevo no existe
+                                    $query = "INSERT INTO `user_otheroptions` "
+                                            . "(`id`, `catalogo`, `value`, `count`, `createtime`, `lastupdate`, `status`) "
+                                            . "VALUES "
+                                            . "(NULL, '$catalogo', '$value', '1', '$time', '$time', '1');";
+                                    $result = $this->makequery($query);
+
+                                    if($result[0]){
+                                        $query2 = "SELECT `id` FROM `user_otheroptions` WHERE `value`='$value' AND `catalogo`='$catalogo' AND `createtime`='$time' LIMIT 1;";
+                                        
+                                        $result2 = $this->makequery($query2);
+                                        if($result2[0]){
+                                            while($row2 = mysqli_fetch_array($result2[1])){
+                                                $position = $row2['id'];
+                                            }
+                                        }
+                                        return array(true, $position);
+                                    }
+                                }else{///nuevo existente
+                                   $query = "UPDATE `user_otheroptions` SET `count` = `count`+1 WHERE `user_otheroptions`.`id` = $position;"; 
+                                   $result = $this->makequery($query);
+                                   return array(true, $position);
+                                }
+                            }else{//Nuevo parte del catalogo
+                                return array(FALSE, $position);
+                            }
+                        }
 	}
 ?>

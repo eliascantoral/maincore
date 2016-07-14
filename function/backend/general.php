@@ -1,6 +1,6 @@
 <?php 
 	/** MySQL database name */
-	define('DB_NAME2', 'myactivity');
+	define('DB_NAME2', 'merp');
 	
 	/** MySQL database username */
 	define('DB_USER2', 'root');
