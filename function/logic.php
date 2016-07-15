@@ -6,11 +6,11 @@
 	}
 	function get_variable($var){
 		switch($var){
-                        case "sitename": return "MainCore";
-                        case "prfx": return "maincore";
-			case "home": return "http://localhost/maincore/";
+                        case "sitename": return "M-ERP";
+                        case "prfx": return "merp";
+			case "home": return "http://localhost/myapp/merp/";
 			case "ajax": return "function/service.php";
-                        case "content": return "http://localhost/maincore/";
+                        case "content": return "http://localhost/myapp/merp";
 			default:{return "";}
 		}
 	}
@@ -106,4 +106,5 @@
         require_once 'user_logic.php';
         require_once 'catalogo_logic.php';
         require_once 'mail_logic.php';
+        require_once 'files_logic.php';
 ?>

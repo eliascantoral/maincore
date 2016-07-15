@@ -177,5 +177,35 @@
                                 return array(FALSE, $position);
                             }
                         }
+                        function createnewfile($uniqueid, $dirfile, $urlfile, $filename, $table, $tableid, $userid){
+                            $time = time();
+                            $query = "INSERT INTO `fileupload` (`id`, `uniqueid`, `dirfile`, `urlfile`, `filename`, `table`, `tableid`, `timecreate`, `status`) VALUES (NULL, '".$uniqueid."', '".$dirfile."', '".$urlfile."', '".$filename."', '".$table."', '".$tableid."', '".$time."','1');";
+                            
+                            $result = $this->makequery($query);
+                            if($result[0])
+                                return true;
+                            return FALSE;
+                        }
+                        function deletefile($uniqueid){
+                            $time = time();
+                            $query = "UPDATE `fileupload` SET `status`='0' WHERE `uniqueid`='".$uniqueid."';";
+                            $result = $this->makequery($query);
+                            if($result[0]){
+                                return true;
+                            }
+                            return false;
+                        }
+                        function getfiles($table, $tableid){
+                            $query = "SELECT * FROM `fileupload` WHERE `table`='".$table."' AND `tableid`='".$tableid."' AND `status`='1';";
+                            $result = $this->makequery($query);
+                            $files = array();
+                            if($result[0]){
+                                while($row = mysqli_fetch_array($result[1])){
+                                    array_push($files, $row);
+                                }
+                                return array(true, $files);
+                            }
+                            return array(false, $files);
+                        }          
 	}
 ?>

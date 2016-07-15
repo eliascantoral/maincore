@@ -93,4 +93,24 @@
 		});
 		
 	}
+        function uploadfile(id){             
+            var fileSelect = document.getElementById('fileselect');         
+            var files = fileSelect.files;
+            var formData = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];    
+                formData.append('files[]', file, file.name);
+            } 
+            $.ajax({
+              url: '<?php echo get_variable("ajax");?>?files='+id+'&table=expresion',
+              data: formData,
+              async: false,
+              processData: false,
+              contentType: false,
+              type: 'POST',
+              success: function(data){
+                $("#answer").html(data);
+              }
+            });    
+        }
 </script>

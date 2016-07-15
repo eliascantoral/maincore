@@ -17,24 +17,30 @@ and open the template in the editor.
         <title><?php out(get_variable("sitename"));?></title>    
         <meta name="viewport" content="width=device-width" />
 
-        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style/ihover.css">
-        <link rel="stylesheet" href="style/bootstrap/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="<?php echo get_variable("content");?>/style/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo get_variable("content");?>/style/ihover.css">
+        <link rel="stylesheet" href="<?php echo get_variable("content");?>/style/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="<?php echo get_variable("content");?>/style/style.css">
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery-ui/jquery-ui.js"></script>
-        <script src="style/bootstrap/js/bootstrap.min.js"></script>
-		<!--<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        <script src="<?php echo get_variable("content");?>/js/jquery.min.js"></script>
+        <script src="<?php echo get_variable("content");?>/js/jquery-ui/jquery-ui.js"></script>
+        <script src="<?php echo get_variable("content");?>/style/bootstrap/js/bootstrap.min.js"></script>
 
-		  ga('create', 'UA-21400652-24', 'auto');
-		  ga('send', 'pageview');
+         
+        <link href="<?php echo get_variable("content");?>/theme/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<?php echo get_variable("content");?>/theme/vendors/nprogress/nprogress.css" rel="stylesheet">
+        <link href="<?php echo get_variable("content");?>/theme/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+        <link href="<?php echo get_variable("content");?>/theme/build/css/custom.min.css" rel="stylesheet">
+    
+    
+        <script src="<?php echo get_variable("content");?>/theme/vendors/fastclick/lib/fastclick.js"></script>
+        <script src="<?php echo get_variable("content");?>/theme/vendors/nprogress/nprogress.js"></script>
+        <script src="<?php echo get_variable("content");?>/theme/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+        <script src="<?php echo get_variable("content");?>/theme/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+        <script src="<?php echo get_variable("content");?>/theme/vendors/google-code-prettify/src/prettify.js"></script>
+        <script src="<?php echo get_variable("content");?>/theme/build/js/custom.min.js"></script>
+        
 
-		</script>-->
     </head>
     <body>
         <div class="container-fluid">
